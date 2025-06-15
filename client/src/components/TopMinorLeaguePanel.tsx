@@ -6,18 +6,18 @@ import BasePanel from '@/components/ui/BasePanel';
 import { COLORS } from '@/lib/constants';
 
 interface TopMinorLeaguePanelProps {
-  pools: MiningPool[] | undefined;
+  miners: MinerBestDifficulty[] | undefined;
   isVisible: boolean;
-  onSelectPool: (pool: MiningPool) => void;
+  onSelectMiner: (miner: MinerBestDifficulty) => void;
 }
 
-export default function TopMinorLeaguePanel({ pools, isVisible, onSelectPool }: TopMinorLeaguePanelProps) {
+export default function TopMinorLeaguePanel({ miners, isVisible, onSelectMiner }: TopMinorLeaguePanelProps) {
   const [isExpanded, setIsExpanded] = useState(true);
 
-  if (!isVisible || !pools) return null;
+  if (!isVisible || !miners) return null;
   
   // Sort pools by rank (ascending), handle null or undefined ranks
-  const topPools = [...pools]
+  const topPools = [...miners]
     .sort((a, b) => {
       // If either rank is null/undefined, use default values
       const rankA = a.rank ?? Number.MAX_SAFE_INTEGER;
@@ -47,37 +47,37 @@ export default function TopMinorLeaguePanel({ pools, isVisible, onSelectPool }: 
           <thead className="text-xs text-gray-400 uppercase font-jetbrains">
             <tr className="border-b border-gray-800">
               <th className="px-4 py-2 text-left">Rank</th>
-              <th className="px-4 py-2 text-left">Pool</th>
+              <th className="px-4 py-2 text-left">Miner</th>
               <th className="px-4 py-2 text-left">Best Difficulty</th>
             </tr>
           </thead>
           <tbody>
-            {topPools.map(pool => (
+            {miners.map((miner, idx) => (
               <tr 
-                key={pool.id} 
+                key={miner.id} 
                 className="border-b border-gray-800 hover:bg-black hover:bg-opacity-40 cursor-pointer"
-                onClick={() => onSelectPool(pool)}
+                onClick={() => onSelectMiner(miner)}
               >
                 <td className="px-4 py-3 font-jetbrains">
-                  {getRankDisplay(pool.rank)}
+                  {idx + 1}
                 </td>
                 <td className="px-4 py-3 font-semibold">
                   <div className="flex items-center">
                     <img 
-                      src={pool.avatar} 
-                      alt={pool.name} 
+                      src={miner.avatar} 
+                      alt={miner.name} 
                       className="w-6 h-6 rounded-full mr-2 border border-[#ff00ea]" 
                     />
                     <div className="flex flex-col">
-                      <span className="truncate max-w-[120px]">{pool.name}</span>
-                      {pool.poolApiUrl && (
-                        <StatusIndicator pool={pool} size="sm" />
+                      <span className="truncate max-w-[120px]">{miner.name}</span>
+                      {miner.poolApiUrl && (
+                        <StatusIndicator pool={miner} size="sm" />
                       )}
                     </div>
                   </div>
                 </td>
                 <td className="px-4 py-3 text-right font-jetbrains text-[#00f3ff]">
-                  {pool.hashrate}
+                  {miner.bestDifficulty}
                 </td>
               </tr>
             ))}

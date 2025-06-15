@@ -8,6 +8,7 @@ import AppLayout from '@/components/layout/AppLayout';
 import { usePoolData } from '@/hooks/use-pool-data';
 import { usePoolHashrateTracking } from '@/hooks/use-pool-hashrate-tracking';
 import { MiningPool } from '@shared/schema';
+import { useBestDifficulty } from '@/hooks/use-best-difficulty';
 
 // Import Leaflet CSS file - this is necessary for the map to display properly
 import 'leaflet/dist/leaflet.css';
@@ -42,6 +43,8 @@ export default function Home() {
   
   // Track hashrate changes of top 3 pools and notify when they increase
   const { hashrateChanges } = usePoolHashrateTracking(displayPools);
+  
+  const { miners } = useBestDifficulty();
   
   const handlePoolSelect = (pool: MiningPool) => {
     selectPool(pool);
@@ -91,9 +94,9 @@ export default function Home() {
           onSelectPool={handlePoolSelect}
         />
         <TopMinorLeaguePanel 
-          pools={mockPools} 
-          isVisible={true} 
-          onSelectPool={handlePoolSelect}
+          miners={miners}
+          isVisible={true}
+          onSelectMiner={handlePoolSelect}
         />
       </div>
     </AppLayout>
