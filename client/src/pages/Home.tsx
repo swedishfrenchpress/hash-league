@@ -3,6 +3,7 @@ import MapVisualization from '@/components/MapVisualization';
 import SidePanel from '@/components/SidePanel';
 import ActionButtons from '@/components/ActionButtons';
 import TopRankingsPanel from '@/components/TopRankingsPanel';
+import TopMinorLeaguePanel from '@/components/TopMinorLeaguePanel';
 import AppLayout from '@/components/layout/AppLayout';
 import { usePoolData } from '@/hooks/use-pool-data';
 import { usePoolHashrateTracking } from '@/hooks/use-pool-hashrate-tracking';
@@ -72,6 +73,13 @@ export default function Home() {
       
       {/* Top Rankings Panel - always visible */}
       <TopRankingsPanel 
+        pools={displayPools} 
+        isVisible={true} 
+        onSelectPool={handlePoolSelect}
+      />
+
+      {/* Minor League Rankings Panel */}
+      <TopMinorLeaguePanel 
         pools={displayPools} 
         isVisible={true} 
         onSelectPool={handlePoolSelect}
