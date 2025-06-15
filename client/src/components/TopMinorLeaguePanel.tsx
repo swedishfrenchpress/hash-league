@@ -28,7 +28,7 @@ export default function TopMinorLeaguePanel({ pools, isVisible, onSelectPool }: 
     
   
   return (
-    <div className="fixed top-[calc(5rem+420px)] left-5 z-20 w-80 rounded-lg shadow-[0_0_10px_#00f3ff]">
+    <div className="w-80 rounded-lg shadow-[0_0_10px_#00f3ff]">
       <BasePanel
         title="Top 10 Minor League Pools"
         titleIcon={<Trophy className="text-[#00f3ff] h-5 w-5" />}

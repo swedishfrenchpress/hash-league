@@ -71,19 +71,19 @@ export default function Home() {
       {/* Action Buttons - positioned in bottom right */}
       <ActionButtons onFaqClick={handleFaqClick} />
       
-      {/* Top Rankings Panel - always visible */}
-      <TopRankingsPanel 
-        pools={displayPools} 
-        isVisible={true} 
-        onSelectPool={handlePoolSelect}
-      />
-
-      {/* Minor League Rankings Panel */}
-      <TopMinorLeaguePanel 
-        pools={displayPools} 
-        isVisible={true} 
-        onSelectPool={handlePoolSelect}
-      />
+      {/* Rankings Panels Stack */}
+      <div className="fixed top-20 left-5 z-20 w-80 flex flex-col gap-4">
+        <TopRankingsPanel 
+          pools={displayPools} 
+          isVisible={true} 
+          onSelectPool={handlePoolSelect}
+        />
+        <TopMinorLeaguePanel 
+          pools={displayPools} 
+          isVisible={true} 
+          onSelectPool={handlePoolSelect}
+        />
+      </div>
     </AppLayout>
   );
 }

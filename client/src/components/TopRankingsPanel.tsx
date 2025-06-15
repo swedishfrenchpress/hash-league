@@ -28,7 +28,7 @@ export default function TopRankingsPanel({ pools, isVisible, onSelectPool }: Top
     
   
   return (
-    <div className="fixed top-20 left-5 z-20 w-80 rounded-lg shadow-[0_0_10px_#00f3ff]">
+    <div className="w-80 rounded-lg shadow-[0_0_10px_#00f3ff]">
       <BasePanel
         title="Top 10 Mining Pools"
         titleIcon={<Trophy className="text-[#00f3ff] h-5 w-5" />}
