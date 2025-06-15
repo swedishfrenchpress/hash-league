@@ -28,14 +28,14 @@ export default function TopMinorLeaguePanel({ pools, isVisible, onSelectPool }: 
     
   
   return (
-    <div className="w-80 rounded-lg shadow-[0_0_10px_#00f3ff]">
+    <div className="w-80 rounded-lg shadow-[0_0_10px_#ffe600]">
       <BasePanel
-        title="Top 10 Minor League Pools"
-        titleIcon={<Trophy className="text-[#00f3ff] h-5 w-5" />}
+        title="Minor League Miners"
+        titleIcon={<Trophy className="text-yellow-400 h-5 w-5" />}
         isCollapsible={true}
         isCollapsed={!isExpanded}
         onToggleCollapse={() => setIsExpanded(!isExpanded)}
-        borderColor={COLORS.neonBlue}
+        borderColor="#ffe600"
         bodyClassName="p-0 max-h-[60vh] overflow-y-auto custom-scrollbar"
       >
         <table className="w-full text-sm table-fixed">
@@ -48,7 +48,7 @@ export default function TopMinorLeaguePanel({ pools, isVisible, onSelectPool }: 
             <tr className="border-b border-gray-800">
               <th className="px-4 py-2 text-left">Rank</th>
               <th className="px-4 py-2 text-left">Pool</th>
-              <th className="px-4 py-2 text-right">Hashrate</th>
+              <th className="px-4 py-2 text-left">Best Difficulty</th>
             </tr>
           </thead>
           <tbody>

@@ -12,6 +12,18 @@ import { MiningPool } from '@shared/schema';
 // Import Leaflet CSS file - this is necessary for the map to display properly
 import 'leaflet/dist/leaflet.css';
 
+const mockPools = [
+  {
+    id: 1,
+    name: "Local Erik Pool",
+    rank: 1,
+    avatar: "https://placehold.co/32x32", // or your local image
+    hashrate: "123.45 TH/s",
+    poolApiUrl: "http://localhost:4000/api", // your local pool
+  },
+  // Add more mock pools if you want
+];
+
 export default function Home() {
   const [isPanelOpen, setIsPanelOpen] = useState(false);
   const [showFaq, setShowFaq] = useState(false);
@@ -74,12 +86,12 @@ export default function Home() {
       {/* Rankings Panels Stack */}
       <div className="fixed top-20 left-5 z-20 w-80 flex flex-col gap-4">
         <TopRankingsPanel 
-          pools={displayPools} 
+          pools={mockPools} 
           isVisible={true} 
           onSelectPool={handlePoolSelect}
         />
         <TopMinorLeaguePanel 
-          pools={displayPools} 
+          pools={mockPools} 
           isVisible={true} 
           onSelectPool={handlePoolSelect}
         />
