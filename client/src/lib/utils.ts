@@ -74,3 +74,26 @@ export function calculateTrend(data: number[] | undefined) {
   
   return { text: 'Stable', color: 'text-yellow-500' };
 }
+
+/**
+ * Formats a large number into a readable format with k, M, B suffixes
+ * @param value - The number to format
+ * @param decimals - Number of decimal places (default: 2)
+ * @returns Formatted string like "710.64k", "1.23M", "4.56B"
+ */
+export function formatLargeNumber(value: number, decimals: number = 2): string {
+  if (value === 0) return '0';
+  
+  const absValue = Math.abs(value);
+  const sign = value < 0 ? '-' : '';
+  
+  if (absValue >= 1e9) {
+    return `${sign}${(absValue / 1e9).toFixed(decimals)}B`;
+  } else if (absValue >= 1e6) {
+    return `${sign}${(absValue / 1e6).toFixed(decimals)}M`;
+  } else if (absValue >= 1e3) {
+    return `${sign}${(absValue / 1e3).toFixed(decimals)}k`;
+  } else {
+    return `${sign}${absValue.toFixed(decimals)}`;
+  }
+}

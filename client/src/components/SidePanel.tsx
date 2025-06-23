@@ -6,6 +6,7 @@ import StatusIndicator from "@/components/ui/StatusIndicator";
 import HashrateStat from "@/components/ui/HashrateStat";
 import SimpleBarChart from "@/components/ui/SimpleBarChart";
 import FaqContent from "@/components/FaqContent";
+import { formatLargeNumber } from '@/lib/utils';
 
 interface SidePanelProps {
   isOpen: boolean;
@@ -127,7 +128,7 @@ export default function SidePanel({
                         value={
                           typeof pool.difficulty === "string" &&
                           !isNaN(parseFloat(pool.difficulty))
-                            ? parseFloat(pool.difficulty).toExponential(2)
+                            ? formatLargeNumber(parseFloat(pool.difficulty))
                             : "N/A"
                         }
                         borderColor={COLORS.neonGreen}

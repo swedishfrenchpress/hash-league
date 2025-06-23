@@ -1,9 +1,10 @@
 import { useState } from 'react';
 import { Trophy } from 'lucide-react';
-import { MiningPool } from '@shared/schema';
 import StatusIndicator from '@/components/ui/StatusIndicator';
 import BasePanel from '@/components/ui/BasePanel';
 import { COLORS } from '@/lib/constants';
+import { formatLargeNumber } from '@/lib/utils';
+import { MinerBestDifficulty } from '@/hooks/use-best-difficulty';
 
 interface TopMinorLeaguePanelProps {
   miners: MinerBestDifficulty[] | undefined;
@@ -16,14 +17,9 @@ export default function TopMinorLeaguePanel({ miners, isVisible, onSelectMiner }
 
   if (!isVisible || !miners) return null;
   
-  // Sort pools by rank (ascending), handle null or undefined ranks
-  const topPools = [...miners]
-    .sort((a, b) => {
-      // If either rank is null/undefined, use default values
-      const rankA = a.rank ?? Number.MAX_SAFE_INTEGER;
-      const rankB = b.rank ?? Number.MAX_SAFE_INTEGER;
-      return rankA - rankB;
-    })
+  // Sort miners by best difficulty (descending) to show highest first
+  const sortedMiners = [...miners]
+    .sort((a, b) => b.bestDifficulty - a.bestDifficulty)
     .slice(0, 10);
     
   
@@ -52,7 +48,7 @@ export default function TopMinorLeaguePanel({ miners, isVisible, onSelectMiner }
             </tr>
           </thead>
           <tbody>
-            {miners.map((miner, idx) => (
+            {sortedMiners.map((miner, idx) => (
               <tr 
                 key={miner.id} 
                 className="border-b border-gray-800 hover:bg-black hover:bg-opacity-40 cursor-pointer"
@@ -70,14 +66,11 @@ export default function TopMinorLeaguePanel({ miners, isVisible, onSelectMiner }
                     />
                     <div className="flex flex-col">
                       <span className="truncate max-w-[120px]">{miner.name}</span>
-                      {miner.poolApiUrl && (
-                        <StatusIndicator pool={miner} size="sm" />
-                      )}
                     </div>
                   </div>
                 </td>
                 <td className="px-4 py-3 text-right font-jetbrains text-[#00f3ff]">
-                  {miner.bestDifficulty}
+                  {formatLargeNumber(miner.bestDifficulty)}
                 </td>
               </tr>
             ))}
