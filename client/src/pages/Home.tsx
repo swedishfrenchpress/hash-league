@@ -16,7 +16,7 @@ import 'leaflet/dist/leaflet.css';
 const mockPools = [
   {
     id: 1,
-    name: "Local Erik Pool",
+    name: "No Live Data Here",
     rank: 1,
     avatar: "https://placehold.co/32x32", // or your local image
     hashrate: "123.45 TH/s",

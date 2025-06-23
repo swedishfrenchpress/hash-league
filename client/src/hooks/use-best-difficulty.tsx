@@ -13,7 +13,7 @@ export function useBestDifficulty() {
 
   useEffect(() => {
     const fetchData = () => {
-      fetch('http://localhost:3334/api/pool')
+      fetch('http://localhost:3334/api/info')
         .then(res => res.json())
         .then(data => {
           if (data.highScores && data.highScores.length > 0) {
@@ -29,6 +29,10 @@ export function useBestDifficulty() {
           } else {
             setMiners([]);
           }
+        })
+        .catch(error => {
+          console.error('Error fetching best difficulty data:', error);
+          setMiners([]);
         });
     };
 
