@@ -344,7 +344,12 @@
 
   /* Custom scrollbar styles */
   .custom-scrollbar::-webkit-scrollbar {
-    width: 6px;
+    display: none;
+  }
+
+  .custom-scrollbar {
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none;  /* IE and Edge */
   }
 
   .custom-scrollbar::-webkit-scrollbar-track {

@@ -97,3 +97,32 @@ export function formatLargeNumber(value: number, decimals: number = 2): string {
     return `${sign}${absValue.toFixed(decimals)}`;
   }
 }
+
+/**
+ * Formats hash rate values with proper units (H/s, KH/s, MH/s, etc.)
+ * @param value - The hash rate in H/s
+ * @param decimals - Number of decimal places (default: 2)
+ * @returns Formatted string like "1.23 KH/s", "456.78 MH/s", "9.12 GH/s"
+ */
+export function formatHashRate(value: number, decimals: number = 2): string {
+  if (value === 0) return '0 H/s';
+  
+  const absValue = Math.abs(value);
+  const sign = value < 0 ? '-' : '';
+  
+  if (absValue >= 1e18) {
+    return `${sign}${(absValue / 1e18).toFixed(decimals)} EH/s`;
+  } else if (absValue >= 1e15) {
+    return `${sign}${(absValue / 1e15).toFixed(decimals)} PH/s`;
+  } else if (absValue >= 1e12) {
+    return `${sign}${(absValue / 1e12).toFixed(decimals)} TH/s`;
+  } else if (absValue >= 1e9) {
+    return `${sign}${(absValue / 1e9).toFixed(decimals)} GH/s`;
+  } else if (absValue >= 1e6) {
+    return `${sign}${(absValue / 1e6).toFixed(decimals)} MH/s`;
+  } else if (absValue >= 1e3) {
+    return `${sign}${(absValue / 1e3).toFixed(decimals)} KH/s`;
+  } else {
+    return `${sign}${absValue.toFixed(decimals)} H/s`;
+  }
+}

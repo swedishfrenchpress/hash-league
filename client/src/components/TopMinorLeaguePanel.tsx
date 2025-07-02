@@ -3,7 +3,7 @@ import { Trophy } from 'lucide-react';
 import StatusIndicator from '@/components/ui/StatusIndicator';
 import BasePanel from '@/components/ui/BasePanel';
 import { COLORS } from '@/lib/constants';
-import { formatLargeNumber } from '@/lib/utils';
+import { formatLargeNumber, formatHashRate } from '@/lib/utils';
 import { MinerBestDifficulty } from '@/hooks/use-best-difficulty';
 
 interface TopMinorLeaguePanelProps {
@@ -26,7 +26,7 @@ export default function TopMinorLeaguePanel({ miners, isVisible, onSelectMiner }
   return (
     <div className="w-80 rounded-lg shadow-[0_0_10px_#ffe600]">
       <BasePanel
-        title="Minor League Miners"
+        title="Live Miners"
         titleIcon={<Trophy className="text-yellow-400 h-5 w-5" />}
         isCollapsible={true}
         isCollapsed={!isExpanded}
@@ -37,14 +37,14 @@ export default function TopMinorLeaguePanel({ miners, isVisible, onSelectMiner }
         <table className="w-full text-sm table-fixed">
           <colgroup>
             <col style={{ width: "20%" }} />
-            <col style={{ width: "50%" }} />
-            <col style={{ width: "30%" }} />
+            <col style={{ width: "60%" }} />
+            <col style={{ width: "20%" }} />
           </colgroup>
           <thead className="text-xs text-gray-400 uppercase font-jetbrains">
             <tr className="border-b border-gray-800">
               <th className="px-4 py-2 text-left">Rank</th>
               <th className="px-4 py-2 text-left">Miner</th>
-              <th className="px-4 py-2 text-left">Best Difficulty</th>
+              <th className="px-4 py-2 text-left">Best Diff</th>
             </tr>
           </thead>
           <tbody>
@@ -65,7 +65,12 @@ export default function TopMinorLeaguePanel({ miners, isVisible, onSelectMiner }
                       className="w-6 h-6 rounded-full mr-2 border border-[#ff00ea]" 
                     />
                     <div className="flex flex-col">
-                      <span className="truncate max-w-[120px]">{miner.name}</span>
+                      <span className="truncate max-w-[100px]">{miner.name}</span>
+                      {miner.totalHashRate > 0 && (
+                        <span className="text-xs text-gray-400 font-jetbrains">
+                          {formatHashRate(miner.totalHashRate)}
+                        </span>
+                      )}
                     </div>
                   </div>
                 </td>
